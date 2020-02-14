@@ -5,15 +5,15 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Blindfold</string>
+	<string>Blindfold Neue</string>
 	<key>CFBundleExecutable</key>
 	<string>plugin</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.markfromberg.BlindFold</string>
+	<string>com.stone-zeng.BlindFoldNeue</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Blindfold</string>
+	<string>Blindfold Neue</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleVersion</key>
@@ -21,9 +21,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.2.5</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright, Mark Frömberg (@mark2mark), 2015–2019</string>
+	<string>Copyright, Mark Frömberg (@mark2mark), 2015–2019; Xiangdong Zeng, 2020</string>
 	<key>NSPrincipalClass</key>
-	<string>BlindFold</string>
+	<string>BlindFoldNeue</string>
 	<key>PyMainFileNames</key>
 	<array>
 		<string>../MacOS/main.py</string>
