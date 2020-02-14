@@ -2,7 +2,7 @@
 
 ## Plugin for Glyphsapp
 
-This is a Plugin for the [Glyphs font editor](http://glyphsapp.com/). It blackens out everything beyond the xHeight or CapHeight. Useful for Spacing and Kerning because the xHeight or CapHeight is what matters most.
+This is a forked version of [Blindfold](https://github.com/Mark2Mark/Blindfold), a plugin for the [Glyphs font editor](http://glyphsapp.com/). It covers the boundary of the glyphs. Useful for design CJK fonts.
 
 ### Install
 
@@ -34,7 +34,7 @@ Feel free to comment or pull requests for any improvements.
 
 ### License
 
-- Copyright 2015&ndash;2019 [Mark Frömberg](http://www.markfromberg.com/) *@Mark2Mark*
+- Copyright 2015–2019 [Mark Frömberg](http://www.markfromberg.com/) *@Mark2Mark*
 - Copyright 2020 Xiangdong Zeng *@stone-zeng*
 
 Made possible with the GlyphsSDK by Georg Seifert (@schriftgestalt) and Rainer Erich Scheichelbauer (@mekkablue).
