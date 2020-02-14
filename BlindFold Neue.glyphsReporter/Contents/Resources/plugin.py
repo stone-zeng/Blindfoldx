@@ -53,15 +53,17 @@ class BlindFoldNeue(ReporterPlugin):
 		self.blindfoldWidth = (100, 100, 100, 100)  # Initial value
 
 		font = Glyphs.font
-		width = eval(font.customParameters['blindfoldWidth'])
+		widthStr = font.customParameters['blindfoldWidth']
 
-		if type(width) == tuple:
-			if len(width) == 2:
-				self.blindfoldWidth = (width[0], width[0], width[1], width[1])
-			elif len(width) == 4:
-				self.blindfoldWidth = width
-		elif type(width) == int or type(width) == float:
-			self.blindfoldWidth = (width, width, width, width)
+		if widthStr:
+			width = eval(widthStr)
+			if type(width) == tuple:
+				if len(width) == 2:
+					self.blindfoldWidth = (width[0], width[0], width[1], width[1])
+				elif len(width) == 4:
+					self.blindfoldWidth = width
+			elif type(width) == int or type(width) == float:
+				self.blindfoldWidth = (width, width, width, width)
 
 	@objc.python_method
 	def foreground(self, layer):
@@ -93,8 +95,8 @@ class BlindFoldNeue(ReporterPlugin):
 
 		if self.inverseBlindfold:
 			rect = (
-				(left_width, bottom_width),
-				(width - left_width - right_width, ascender - top_width - bottom_width)
+				(left_width, descender + bottom_width),
+				(width - left_width - right_width, height - top_width - bottom_width)
 			)
 			NSBezierPath.fillRect_(rect)
 		else:
