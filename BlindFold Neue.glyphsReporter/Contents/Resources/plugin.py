@@ -13,6 +13,7 @@
 
 from GlyphsApp import *
 from GlyphsApp.plugins import *
+from vanilla import *
 import objc
 import math
 
@@ -26,21 +27,33 @@ class BlindFoldNeue(ReporterPlugin):
 		})
 
 	@objc.python_method
+	def getWidth(self):
+		self.blindfoldWidth = (100, 100, 100, 100)  # Initial value
+
+		font = Glyphs.font
+		width = eval(font.customParameters['blindfoldWidth'])
+
+		if type(width) == tuple:
+			if len(width) == 2:
+				self.blindfoldWidth = (width[0], width[0], width[1], width[1])
+			elif len(width) == 4:
+				self.blindfoldWidth = width
+		elif type(width) == int or type(width) == float:
+			self.blindfoldWidth = (width, width, width, width)
+
+	@objc.python_method
 	def foreground(self, layer):
+		self.getWidth()
 		self.drawRect(layer, self.getScale())
 
 	@objc.python_method
 	def inactiveLayerForeground(self, layer):
+		self.getWidth()
 		self.drawRect(layer, self.getScale())
 
 	@objc.python_method
 	def drawRect(self, layer, scale):
 		NSColor.blackColor().set()
-
-		LEFT_VALUE   = 200
-		RIGHT_VALUE  = 200
-		TOP_VALUE 	 = 200
-		BOTTOM_VALUE = 200
 
 		master = layer.associatedFontMaster()
 
@@ -54,11 +67,16 @@ class BlindFoldNeue(ReporterPlugin):
 		width  = layer.width
 		height = ascender - descender
 
+		(left_width, right_width, top_width, bottom_width) = self.blindfoldWidth
+
 		# Left, right, top, bottom
-		NSBezierPath.fillRect_(((0, descender), (LEFT_VALUE, height)))
-		NSBezierPath.fillRect_(((width - RIGHT_VALUE, descender), (RIGHT_VALUE, height)))
-		NSBezierPath.fillRect_(((0, ascender - TOP_VALUE), (width, TOP_VALUE)))
-		NSBezierPath.fillRect_(((0, descender), (width, BOTTOM_VALUE)))
+		for rect in [
+			((0, descender), (left_width, height)),
+			((width - right_width, descender), (right_width, height)),
+			((0, ascender - top_width), (width, top_width)),
+			((0, descender), (width, bottom_width)),
+		]:
+			NSBezierPath.fillRect_(rect)
 
 	@objc.python_method
 	def __file__(self):

@@ -1,8 +1,4 @@
-<p align="center"> 
-<a href='https://ko-fi.com/M4M580HG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-</p>
-
-# Blindfold
+# Blindfold Neue
 
 ## Plugin for Glyphsapp
 
@@ -17,7 +13,6 @@ This is a Plugin for the [Glyphs font editor](http://glyphsapp.com/). It blacken
 
 ![Uncover xHeight Demo](https://raw.githubusercontent.com/Mark2Mark/Glyphsapp-Plugins/11561cf20d110e314943e6294edf47defbdb73bc/Screenshots/UncoverXHeight/UcXh%2001.png?raw=true "Uncover xHeight Demo")
 
-
 ### Known issues
 
 - None so far
@@ -28,7 +23,8 @@ Feel free to comment or pull requests for any improvements.
 
 ### License
 
-Copyright 2015 [Mark Frömberg](http://www.markfromberg.com/) *@Mark2Mark*
+- Copyright 2015&ndash; [Mark Frömberg](http://www.markfromberg.com/) *@Mark2Mark*
+- Copyright 2020 Xiangdong Zeng *@stone-zeng*
 
 Made possible with the GlyphsSDK by Georg Seifert (@schriftgestalt) and Rainer Erich Scheichelbauer (@mekkablue).
 
