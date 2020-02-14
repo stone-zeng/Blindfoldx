@@ -15,7 +15,6 @@ from GlyphsApp import *
 from GlyphsApp.plugins import *
 from vanilla import *
 import objc
-import math
 
 class BlindFoldNeue(ReporterPlugin):
 
@@ -25,6 +24,29 @@ class BlindFoldNeue(ReporterPlugin):
 			'en': 'Blindfold Neue',
 			'zh': u'眼罩 Neue',
 		})
+
+		self.inverseBlindfold = False
+
+		viewWidth = 150
+		viewHeight = 40
+		self.checkBoxMenuView = Window((viewWidth, viewHeight))
+		self.checkBoxMenuView.group = Group((0, 0, viewWidth, viewHeight))
+		self.checkBoxMenuView.group.checkBox = CheckBox(
+			(10, 10, -10, 20),
+			title=Glyphs.localize({
+				'en': 'Inverse blindfold',
+				'zh': u'反转眼罩',
+			}),
+			callback=self.checkBoxCallback)
+
+		# Define the menu
+		self.generalContextMenus = [
+			{'view': self.checkBoxMenuView.group.getNSView()}
+		]
+
+	def checkBoxCallback(self, sender):
+		self.inverseBlindfold = bool(sender.get())
+		print('CheckBox value:', sender.get(), type(sender.get()))
 
 	@objc.python_method
 	def getWidth(self):
@@ -69,14 +91,21 @@ class BlindFoldNeue(ReporterPlugin):
 
 		(left_width, right_width, top_width, bottom_width) = self.blindfoldWidth
 
-		# Left, right, top, bottom
-		for rect in [
-			((0, descender), (left_width, height)),
-			((width - right_width, descender), (right_width, height)),
-			((0, ascender - top_width), (width, top_width)),
-			((0, descender), (width, bottom_width)),
-		]:
+		if self.inverseBlindfold:
+			rect = (
+				(left_width, bottom_width),
+				(width - left_width - right_width, ascender - top_width - bottom_width)
+			)
 			NSBezierPath.fillRect_(rect)
+		else:
+			for rect in [
+				# Left, right, top, bottom
+				((0, descender), (left_width, height)),
+				((width - right_width, descender), (right_width, height)),
+				((0, ascender - top_width), (width, top_width)),
+				((0, descender), (width, bottom_width)),
+			]:
+				NSBezierPath.fillRect_(rect)
 
 	@objc.python_method
 	def __file__(self):
