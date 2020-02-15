@@ -19,6 +19,9 @@ This is a forked version of [Blindfold](https://github.com/Mark2Mark/Blindfold),
     - An integer or float number, e.g. `100` (default) or `150.2`
     - A length-2 tuple `(<horizontal>, <vertical>)`, e.g. `(100, 200)`
     - A length-4 tuple `(<left>, <right>, <top>, <bottom>)`, e.g. `(100, 200, 300, 400)`
+- To adjust the color:
+  - In *Font Info > Font*, add custom parameter `blindfoldColor`
+  - Acceptable value can be a length-4 tuple `(<red>, <green>, <blue>, <alpha>)`, each value should between 0 to 1, e.g. `(0, 0.3, 0.2, 0.7)`
 
 ### Examples
 

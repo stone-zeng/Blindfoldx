@@ -28,11 +28,11 @@ class BlindFoldNeue(ReporterPlugin):
 		self.inverseBlindfold = False
 
 		viewWidth = 150
-		viewHeight = 40
+		viewHeight = 30
 		self.checkBoxMenuView = Window((viewWidth, viewHeight))
 		self.checkBoxMenuView.group = Group((0, 0, viewWidth, viewHeight))
 		self.checkBoxMenuView.group.checkBox = CheckBox(
-			(10, 10, -10, 20),
+			(10, 5, -10, 20),
 			title=Glyphs.localize({
 				'en': 'Inverse blindfold',
 				'zh': u'反转眼罩',
@@ -49,35 +49,17 @@ class BlindFoldNeue(ReporterPlugin):
 		print('CheckBox value:', sender.get(), type(sender.get()))
 
 	@objc.python_method
-	def getWidth(self):
-		self.blindfoldWidth = (100, 100, 100, 100)  # Initial value
-
-		font = Glyphs.font
-		widthStr = font.customParameters['blindfoldWidth']
-
-		if widthStr:
-			width = eval(widthStr)
-			if type(width) == tuple:
-				if len(width) == 2:
-					self.blindfoldWidth = (width[0], width[0], width[1], width[1])
-				elif len(width) == 4:
-					self.blindfoldWidth = width
-			elif type(width) == int or type(width) == float:
-				self.blindfoldWidth = (width, width, width, width)
-
-	@objc.python_method
 	def foreground(self, layer):
-		self.getWidth()
 		self.drawRect(layer, self.getScale())
 
 	@objc.python_method
 	def inactiveLayerForeground(self, layer):
-		self.getWidth()
 		self.drawRect(layer, self.getScale())
 
 	@objc.python_method
 	def drawRect(self, layer, scale):
-		NSColor.blackColor().set()
+		self.getWidth()
+		self.getColor()
 
 		master = layer.associatedFontMaster()
 
@@ -104,10 +86,37 @@ class BlindFoldNeue(ReporterPlugin):
 				# Left, right, top, bottom
 				((0, descender), (left_width, height)),
 				((width - right_width, descender), (right_width, height)),
-				((0, ascender - top_width), (width, top_width)),
-				((0, descender), (width, bottom_width)),
+				((left_width, ascender - top_width), (width - left_width - right_width, top_width)),
+				((left_width, descender), (width - left_width - right_width, bottom_width)),
 			]:
 				NSBezierPath.fillRect_(rect)
+
+	@objc.python_method
+	def getWidth(self):
+		self.blindfoldWidth = (100, 100, 100, 100)  # Initial value
+
+		widthStr = Glyphs.font.customParameters['blindfoldWidth']
+		if widthStr:
+			width = eval(widthStr)
+			if type(width) == tuple:
+				if len(width) == 2:
+					self.blindfoldWidth = (width[0], width[0], width[1], width[1])
+				elif len(width) == 4:
+					self.blindfoldWidth = width
+			elif type(width) == int or type(width) == float:
+				self.blindfoldWidth = (width, width, width, width)
+
+	@objc.python_method
+	def getColor(self):
+		color = NSColor.colorWithRed_green_blue_alpha_(0, 0, 0, 0.9)  # Initial value
+
+		colorStr = Glyphs.font.customParameters['blindfoldColor']
+		if colorStr:
+			colorTuple = eval(colorStr)
+			if type(colorTuple) == tuple and len(colorTuple) == 4:
+				color = NSColor.colorWithRed_green_blue_alpha_(*colorTuple)
+
+		color.set()
 
 	@objc.python_method
 	def __file__(self):
