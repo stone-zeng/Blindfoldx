@@ -12,7 +12,7 @@ This is a forked version of [Blindfold](https://github.com/Mark2Mark/Blindfold),
 ### Usage
 
 - Select *Glyphs > View > Show Blindfold Neue*
-- Right click, you can select *Inverse blindfold* in the contextual menu
+- Right click, you can *Inverse blindfold* in the contextual menu
 - To adjust the width:
   - In *Font Info > Font*, add custom parameter `blindfoldWidth`
   - Acceptable value can be:

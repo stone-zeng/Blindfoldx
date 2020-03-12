@@ -13,12 +13,9 @@
 
 from GlyphsApp import *
 from GlyphsApp.plugins import *
-from vanilla import *
-import objc
 
 class BlindFoldNeue(ReporterPlugin):
 
-	@objc.python_method
 	def settings(self):
 		self.menuName = Glyphs.localize({
 			'en': 'Blindfold Neue',
@@ -27,36 +24,26 @@ class BlindFoldNeue(ReporterPlugin):
 
 		self.inverseBlindfold = False
 
-		viewWidth = 150
-		viewHeight = 30
-		self.checkBoxMenuView = Window((viewWidth, viewHeight))
-		self.checkBoxMenuView.group = Group((0, 0, viewWidth, viewHeight))
-		self.checkBoxMenuView.group.checkBox = CheckBox(
-			(10, 5, -10, 20),
-			title=Glyphs.localize({
-				'en': 'Inverse blindfold',
-				'zh': u'反转眼罩',
-			}),
-			callback=self.checkBoxCallback)
-
 		# Define the menu
 		self.generalContextMenus = [
-			{'view': self.checkBoxMenuView.group.getNSView()}
+			{
+				'name': Glyphs.localize({
+					'en': 'Inverse blindfold',
+					'zh': u'反转眼罩',
+				}),
+				'action': self.inverse
+			}
 		]
 
-	def checkBoxCallback(self, sender):
-		self.inverseBlindfold = bool(sender.get())
-		print('CheckBox value:', sender.get(), type(sender.get()))
+	def inverse(self):
+		self.inverseBlindfold = not self.inverseBlindfold
 
-	@objc.python_method
 	def foreground(self, layer):
 		self.drawRect(layer, self.getScale())
 
-	@objc.python_method
 	def inactiveLayerForeground(self, layer):
 		self.drawRect(layer, self.getScale())
 
-	@objc.python_method
 	def drawRect(self, layer, scale):
 		self.getWidth()
 		self.getColor()
@@ -91,7 +78,6 @@ class BlindFoldNeue(ReporterPlugin):
 			]:
 				NSBezierPath.fillRect_(rect)
 
-	@objc.python_method
 	def getWidth(self):
 		self.blindfoldWidth = (100, 100, 100, 100)  # Initial value
 
@@ -106,7 +92,6 @@ class BlindFoldNeue(ReporterPlugin):
 			elif type(width) == int or type(width) == float:
 				self.blindfoldWidth = (width, width, width, width)
 
-	@objc.python_method
 	def getColor(self):
 		color = NSColor.colorWithRed_green_blue_alpha_(0, 0, 0, 0.9)  # Initial value
 
@@ -118,7 +103,6 @@ class BlindFoldNeue(ReporterPlugin):
 
 		color.set()
 
-	@objc.python_method
 	def __file__(self):
 		"""Please leave this method unchanged"""
 		return __file__
