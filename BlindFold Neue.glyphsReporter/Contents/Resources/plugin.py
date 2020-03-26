@@ -39,12 +39,12 @@ class BlindFoldNeue(ReporterPlugin):
 		self.inverseBlindfold = not self.inverseBlindfold
 
 	def foreground(self, layer):
-		self.drawRect(layer, self.getScale())
+		self.drawRect(layer)
 
 	def inactiveLayerForeground(self, layer):
-		self.drawRect(layer, self.getScale())
+		self.drawRect(layer)
 
-	def drawRect(self, layer, scale):
+	def drawRect(self, layer):
 		self.getWidth()
 		self.getColor()
 
