@@ -11,11 +11,16 @@
 #
 ###########################################################################################################
 
+import objc
+
+from Foundation import NSBezierPath, NSColor
+
 from GlyphsApp import *
 from GlyphsApp.plugins import *
 
 class BlindFoldNeue(ReporterPlugin):
 
+	@objc.python_method
 	def settings(self):
 		self.menuName = Glyphs.localize({
 			'en': 'Blindfold Neue',
@@ -35,15 +40,19 @@ class BlindFoldNeue(ReporterPlugin):
 			}
 		]
 
+	@objc.python_method
 	def inverse(self):
 		self.inverseBlindfold = not self.inverseBlindfold
 
+	@objc.python_method
 	def foreground(self, layer):
 		self.drawRect(layer)
 
+	@objc.python_method
 	def inactiveLayerForeground(self, layer):
 		self.drawRect(layer)
 
+	@objc.python_method
 	def drawRect(self, layer):
 		self.getWidth()
 		self.getColor()
@@ -78,6 +87,7 @@ class BlindFoldNeue(ReporterPlugin):
 			]:
 				NSBezierPath.fillRect_(rect)
 
+	@objc.python_method
 	def getWidth(self):
 		self.blindfoldWidth = (100, 100, 100, 100)  # Initial value
 
@@ -92,6 +102,7 @@ class BlindFoldNeue(ReporterPlugin):
 			elif type(width) == int or type(width) == float:
 				self.blindfoldWidth = (width, width, width, width)
 
+	@objc.python_method
 	def getColor(self):
 		color = NSColor.colorWithRed_green_blue_alpha_(0, 0, 0, 0.9)  # Initial value
 
@@ -103,6 +114,7 @@ class BlindFoldNeue(ReporterPlugin):
 
 		color.set()
 
+	@objc.python_method
 	def __file__(self):
 		"""Please leave this method unchanged"""
 		return __file__

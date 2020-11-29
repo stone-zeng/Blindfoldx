@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleDisplayName</key>
-	<string>Blindfold Neue</string>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>plugin</string>
 	<key>CFBundleIdentifier</key>
@@ -14,19 +12,23 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>Blindfold Neue</string>
-	<key>CFBundlePackageType</key>
-	<string>BNDL</string>
-	<key>CFBundleVersion</key>
-	<string>13</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.5</string>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>UpdateFeedURL</key>
+	<string>https://github.com/3type/Blindfold-Neue/blob/master/BlindFold%20Neue.glyphsReporter/Contents/Info.plist</string>
+	<key>productPageURL</key>
+	<string>https://github.com/3type/Blindfold-Neue</string>
+	<key>productReleaseNotes</key>
+	<string>____LatestReleaseNotes____</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright, Mark Frömberg (@mark2mark), 2015–2019; Xiangdong Zeng, 2020</string>
 	<key>NSPrincipalClass</key>
 	<string>BlindFoldNeue</string>
 	<key>PyMainFileNames</key>
 	<array>
-		<string>../MacOS/main.py</string>
+		<string>plugin.py</string>
 	</array>
 </dict>
 </plist>
