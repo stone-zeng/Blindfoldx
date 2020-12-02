@@ -26,23 +26,32 @@ class BlindFoldNeue(ReporterPlugin):
 			'en': 'Blindfold Neue',
 			'zh': u'眼罩 Neue',
 		})
-
 		self.inverseBlindfold = False
+		self.generalContextMenus = self.buildContextMenus()
 
-		# Define the menu
-		self.generalContextMenus = [
+	@objc.python_method
+	def buildContextMenus(self, sender=None):
+		return [
+			{
+				'name': Glyphs.localize({
+					'en': 'Blindfold Neue Options:',
+					'zh': u'眼罩 Neue 选项：',
+					}), 
+				'action': None,
+			},
 			{
 				'name': Glyphs.localize({
 					'en': 'Inverse blindfold',
 					'zh': u'反转眼罩',
 				}),
-				'action': self.inverse
-			}
+				'action': self.inverse,
+				'state': self.inverseBlindfold,
+			},
 		]
 
-	@objc.python_method
 	def inverse(self):
 		self.inverseBlindfold = not self.inverseBlindfold
+		self.generalContextMenus = self.buildContextMenus()
 
 	@objc.python_method
 	def foreground(self, layer):
@@ -116,5 +125,5 @@ class BlindFoldNeue(ReporterPlugin):
 
 	@objc.python_method
 	def __file__(self):
-		"""Please leave this method unchanged"""
+		'''Please leave this method unchanged'''
 		return __file__
