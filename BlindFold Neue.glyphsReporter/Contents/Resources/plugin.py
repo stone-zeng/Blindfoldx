@@ -65,28 +65,12 @@ class BlindFoldNeue(ReporterPlugin):
 	def drawRect(self, layer):
 		self.getWidth()
 		self.getColor()
-
-		master = layer.associatedFontMaster()
-
-		descender = master.descender
-		ascender  = master.ascender
-
-		customAscender = master.customParameters['ascender']
-		if customAscender is not None:
-			ascender = int(customAscender.split(':')[-1])
-
+		ascender  = layer.ascender
+		descender = layer.descender
 		width  = layer.width
 		height = ascender - descender
-
 		(left_width, right_width, top_width, bottom_width) = self.blindfoldWidth
-
-		if self.inverseBlindfold:
-			rect = (
-				(left_width, descender + bottom_width),
-				(width - left_width - right_width, height - top_width - bottom_width)
-			)
-			NSBezierPath.fillRect_(rect)
-		else:
+		if not self.inverseBlindfold:
 			for rect in [
 				# Left, right, top, bottom
 				((0, descender), (left_width, height)),
@@ -95,6 +79,12 @@ class BlindFoldNeue(ReporterPlugin):
 				((left_width, descender), (width - left_width - right_width, bottom_width)),
 			]:
 				NSBezierPath.fillRect_(rect)
+		else:
+			rect = (
+				(left_width, descender + bottom_width),
+				(width - left_width - right_width, height - top_width - bottom_width)
+			)
+			NSBezierPath.fillRect_(rect)
 
 	@objc.python_method
 	def getWidth(self):
