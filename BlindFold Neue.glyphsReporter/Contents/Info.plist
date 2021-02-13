@@ -15,20 +15,10 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>UpdateFeedURL</key>
-	<string>https://github.com/3type/Blindfold-Neue/blob/master/BlindFold%20Neue.glyphsReporter/Contents/Info.plist</string>
-	<key>productPageURL</key>
-	<string>https://github.com/3type/Blindfold-Neue</string>
-	<key>productReleaseNotes</key>
-	<string>____LatestReleaseNotes____</string>
+	<string>2</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright, Mark Frömberg (@mark2mark), 2015–2019; Xiangdong Zeng, 2020</string>
 	<key>NSPrincipalClass</key>
 	<string>BlindFoldNeue</string>
-	<key>PyMainFileNames</key>
-	<array>
-		<string>plugin.py</string>
-	</array>
 </dict>
 </plist>
